@@ -17,40 +17,7 @@ namespace AuthenticationAPI
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            //var key = builder.Configuration.GetValue<string>("TokenKey");
-
-            // Add services to the container.
-
-            //builder.Services.Configure<MongoDbConfig>(builder.Configuration.GetSection("MongoDbConfig"));
-
-            //builder.Services.AddSingleton<IMongoDbConfig>(sp => sp.GetRequiredService<IOptions<MongoDbConfig>>().Value);
-
-            //builder.Services.AddSingleton<IMongoClient>(mongoConnection => new MongoClient(builder.Configuration.GetValue<string>("MongoDbConfig:ConnectionString")));
-
-            builder.Services.AddScoped<ITokenService,TokenService>();
-            builder.Services.AddIdentity<ApplicationUser, ApplicationRole>()
-                .AddMongoDbStores<ApplicationUser, ApplicationRole, Guid>(builder.Configuration.GetValue<string>("MongoDbConfig:ConnectionString"), builder.Configuration.GetValue<string>("MongoDbConfig:DatabaseName"))
-                .AddDefaultTokenProviders();
-
-            //builder.Services.AddAuthentication(x =>
-            //{
-            //    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            //    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            //}).AddJwtBearer(x => {
-            //    x.RequireHttpsMetadata = true;
-            //    x.SaveToken = true;
-            //    x.TokenValidationParameters = new TokenValidationParameters
-            //    {
-            //        ValidateIssuerSigningKey = true,
-            //        ValidateIssuer = true,
-            //        ValidateAudience = true,
-            //        ValidateLifetime = true,
-            //        ValidIssuer = "hemasundarrao",
-            //        ValidAudience = "hemasundarrao",
-            //        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key))
-            //    };
-
-            //});
+          
             builder.Services.AddCors(options =>
             {
                 options.AddDefaultPolicy(builder =>
@@ -64,32 +31,8 @@ namespace AuthenticationAPI
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(//c =>
-                                           //{
-                                           //c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-                                           //{
-                                           //    In = ParameterLocation.Header,
-                                           //    Description = "Please Insert Token",
-                                           //    Name = "Authorization",
-                                           //    Type = SecuritySchemeType.Http,
-                                           //    BearerFormat = "JWT",
-                                           //    Scheme = "bearer"
-                                           //});
-
-                //c.AddSecurityRequirement(new OpenApiSecurityRequirement
-                //{
-                //    {
-                //        new OpenApiSecurityScheme
-                //        {
-                //            Reference=new OpenApiReference
-                //            {
-                //                Type=ReferenceType.SecurityScheme,
-                //                Id="Bearer"
-                //            }
-                //        },
-                //        new string[]{}
-                //    }
-                //});
-            //}
+                                          
+              
         );
 
             var app = builder.Build();
